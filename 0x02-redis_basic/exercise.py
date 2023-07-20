@@ -72,7 +72,7 @@ def replay(method: Callable):
     """Display the history of calls of a particular function"""
     r = redis.Redis()
     key = method.__qualname__
-    r.get(key).decode('utf-8')
+    count = r.get(key).decode('utf-8')
     inputs = r.lrange(key + ":inputs", 0, -1)
     outputs = r.lrange(key + ":outputs", 0, -1)
     print("{} was called {} times:".format(key, count))
